@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next"
 import type { Metadata, Viewport } from "next";
 import { Anton, Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
@@ -71,6 +72,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main className="flex flex-1 flex-col">{children}</main>
         <SiteFooter />
         <Toaster />
+        <Analytics />
       </body>
     </html>
   );
