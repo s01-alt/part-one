@@ -69,11 +69,13 @@ rate per model version). Every recommendation response returns a `model_version`
 
 ## 5. v2 — TikTok-style content (D-002, D-005)
 
-v2 adds short videos/posts **by brands** (and later users) that tag products.
-Prepare in v1 by keeping social tables product-centred but polymorphic-ready:
+v2 adds short videos/posts **by brands only** that tag products (D-048). Customers never
+post content: they like, save, repost, share and comment. There is no creator or
+user-post role. Prepare in v1 by keeping social tables product-centred but
+polymorphic-ready:
 
-- Add later: `posts (id, author_type, author_id, media, caption, status)`,
-  `post_products (post_id, product_id)`.
+- Add later: `posts (id, brand_id, media, caption, status)` — every post belongs to a
+  brand and is created from the seller dashboard — and `post_products (post_id, product_id)`.
 - Likes/saves/comments/reports already use `(user_id, product_id)`; v2 generalises to
   `(user_id, target_type, target_id)` via a migration — reports already use this shape.
 - Media storage: same S3-compatible bucket; transcoding via a queue job (or a media
@@ -81,4 +83,4 @@ Prepare in v1 by keeping social tables product-centred but polymorphic-ready:
 - Feed ranking reuses the Phase 2–3 signals above.
 - Moderation queue already supports `target_type`; add `post`.
 
-Out of scope until v2: user profiles, user posts, following users, DMs (PRD §8).
+Out of scope until v2: user profiles, following users, DMs (PRD §8). Never planned: user/creator posts (D-048).

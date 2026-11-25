@@ -20,6 +20,8 @@ const AUDIT = [
   { at: "2026-11-18 10:05", actor: "Report Manager (demo)", action: "comment.remove", target: "com_prd_12_0" },
 ];
 
+export const metadata = { title: "System" };
+
 export default async function SystemPage() {
   await requireAdmin("admin.system.view");
   return (

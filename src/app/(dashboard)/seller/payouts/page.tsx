@@ -6,6 +6,8 @@ import { getSellerBalance, listSellerLedger, listSellerPayouts } from "@/lib/dat
 import { formatDate, formatNaira } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
+export const metadata = { title: "Payouts" };
+
 export default async function SellerPayoutsPage() {
   const user = await requireSeller();
   const [balance, ledger, payouts] = await Promise.all([

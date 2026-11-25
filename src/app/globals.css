@@ -159,3 +159,12 @@
     display: none;
   }
 }
+
+/* Keep focused/invalid fields clear of the sticky header when the browser scrolls to them. */
+@layer base {
+  input,
+  textarea,
+  select {
+    scroll-margin-top: 6rem;
+  }
+}

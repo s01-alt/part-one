@@ -3,6 +3,8 @@ import { EmptyState, PageHeader } from "@/components/app/page-parts";
 import { requireUser } from "@/lib/auth/session";
 import { listMyFollowedBrands } from "@/lib/data/account";
 
+export const metadata = { title: "Following" };
+
 export default async function FollowingPage() {
   const user = await requireUser("/account/following");
   const brands = await listMyFollowedBrands(user);

@@ -12,7 +12,6 @@ import { cn } from "@/lib/utils";
 const ROLES: { value: WaitlistRole; label: string; hint: string }[] = [
   { value: "shopper", label: "Shopper", hint: "I want to buy" },
   { value: "brand", label: "Brand", hint: "I want to sell" },
-  { value: "creator", label: "Creator", hint: "I create content" },
 ];
 
 /** Waitlist form, adapted from the GitHub repo into the current design system. */
@@ -71,7 +70,7 @@ export function WaitlistForm({ tone = "light" }: { tone?: "light" | "dark" }) {
       </div>
       <fieldset>
         <legend className="mb-2 text-xs font-bold uppercase tracking-widest">I&apos;m here as a</legend>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 gap-2">
           {ROLES.map((r) => {
             const on = role === r.value;
             return (
@@ -96,7 +95,7 @@ export function WaitlistForm({ tone = "light" }: { tone?: "light" | "dark" }) {
         <Label htmlFor="waitlist-city">
           City <span className="font-normal opacity-60">(optional)</span>
         </Label>
-        <Input id="waitlist-city" name="city" autoComplete="address-level2" placeholder="Lagos" className="h-11" />
+        <Input id="waitlist-city" name="city" autoComplete="address-level2" placeholder="e.g. Lagos" className="h-11" />
       </div>
       {error && (
         <p role="alert" className="rounded-sm border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm text-destructive">

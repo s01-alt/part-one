@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Sell on Part One",
+  title: "Sell",
   description: "Apply to sell your streetwear brand on Part One.",
 };
 

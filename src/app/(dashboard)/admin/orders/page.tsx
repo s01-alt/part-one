@@ -6,6 +6,8 @@ import { requireAdmin } from "@/lib/auth/session";
 import { adminListOrders } from "@/lib/data/account";
 import { formatDate, formatNaira } from "@/lib/format";
 
+export const metadata = { title: "Orders" };
+
 export default async function AdminOrdersPage() {
   await requireAdmin("admin.orders.manage");
   const orders = await adminListOrders();

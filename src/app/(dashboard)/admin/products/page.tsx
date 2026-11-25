@@ -8,6 +8,8 @@ import { adminListProducts } from "@/lib/data/account";
 import { totalStock } from "@/lib/data/catalog";
 import { formatNaira } from "@/lib/format";
 
+export const metadata = { title: "Products" };
+
 export default async function AdminProductsPage() {
   await requireAdmin("admin.products.manage");
   const products = await adminListProducts();

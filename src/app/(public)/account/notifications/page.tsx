@@ -3,6 +3,8 @@ import { NotificationList } from "@/components/account/notification-list";
 import { requireUser } from "@/lib/auth/session";
 import { listMyNotifications } from "@/lib/data/account";
 
+export const metadata = { title: "Notifications" };
+
 export default async function NotificationsPage() {
   const user = await requireUser("/account/notifications");
   const items = await listMyNotifications(user);

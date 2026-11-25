@@ -6,6 +6,8 @@ import { requireSeller } from "@/lib/auth/session";
 import { listSellerOrders } from "@/lib/data/account";
 import { formatDate, formatNaira } from "@/lib/format";
 
+export const metadata = { title: "Orders" };
+
 export default async function SellerOrdersPage() {
   const user = await requireSeller();
   const orders = await listSellerOrders(user);

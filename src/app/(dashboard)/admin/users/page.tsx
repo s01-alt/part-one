@@ -1,18 +1,23 @@
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import type { Metadata } from "next";
+import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { PageHeader } from "@/components/app/page-parts";
-import { MockActions } from "@/components/app/mock-actions";
-import { StatusBadge } from "@/components/app/status-badge";
-import { ADMIN_ROLE_LABELS } from "@/lib/auth/permissions";
+import { UserRow } from "@/components/admin/user-row";
+import { can } from "@/lib/auth/permissions";
 import { requireAdmin } from "@/lib/auth/session";
 import { adminListUsers } from "@/lib/data/account";
-import { formatDate } from "@/lib/format";
+
+export const metadata: Metadata = { title: "Users" };
 
 export default async function AdminUsersPage() {
-  await requireAdmin("admin.users.manage");
+  const me = await requireAdmin("admin.users.manage");
   const users = await adminListUsers();
+  const canManageRoles = can(me, "admin.roles.manage");
   return (
     <>
-      <PageHeader title="Users" description="Customer, seller and admin accounts." />
+      <PageHeader
+        title="Users"
+        description="Everyone signs in with Google as a customer. Brands get seller access when their application is approved; admin access is granted here."
+      />
       <div className="rounded-lg border bg-card">
         <Table>
           <TableHeader>
@@ -27,28 +32,7 @@ export default async function AdminUsersPage() {
           </TableHeader>
           <TableBody>
             {users.map((u) => (
-              <TableRow key={u.id}>
-                <TableCell className="font-medium">{u.name}</TableCell>
-                <TableCell>{u.email}</TableCell>
-                <TableCell>
-                  {u.adminRole ? `Admin · ${ADMIN_ROLE_LABELS[u.adminRole]}` : u.sellerBrandId ? "Seller" : "Customer"}
-                </TableCell>
-                <TableCell>{formatDate(u.createdAt)}</TableCell>
-                <TableCell>
-                  <StatusBadge status={u.status} />
-                </TableCell>
-                <TableCell>
-                  {u.adminRole !== "founder" && (
-                    <MockActions
-                      actions={[
-                        u.status === "active"
-                          ? { label: "Suspend", result: "Suspended", variant: "destructive", confirm: "Suspend this account?" }
-                          : { label: "Reactivate", result: "Reactivated" },
-                      ]}
-                    />
-                  )}
-                </TableCell>
-              </TableRow>
+              <UserRow key={u.id} user={u} isSelf={u.id === me.id} canManageRoles={canManageRoles} />
             ))}
           </TableBody>
         </Table>

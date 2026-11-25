@@ -5,6 +5,8 @@ import { ProductEditor } from "@/components/seller/product-editor";
 import { requireSeller } from "@/lib/auth/session";
 import { getSellerProduct } from "@/lib/data/account";
 
+export const metadata = { title: "Edit product" };
+
 export default async function EditProductPage({ params }: PageProps<"/seller/products/[id]">) {
   const { id } = await params;
   const user = await requireSeller();

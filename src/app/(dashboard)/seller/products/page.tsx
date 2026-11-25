@@ -10,6 +10,8 @@ import { listSellerProducts } from "@/lib/data/account";
 import { totalStock } from "@/lib/data/catalog";
 import { TYPE_LABELS, formatNaira } from "@/lib/format";
 
+export const metadata = { title: "Products" };
+
 export default async function SellerProductsPage() {
   const user = await requireSeller();
   const products = await listSellerProducts(user);

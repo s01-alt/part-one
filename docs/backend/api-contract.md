@@ -34,7 +34,7 @@
 
 | Method & path | Purpose | Frontend caller |
 |---|---|---|
-| POST `/waitlist` `{ name, email, role, city? }` | Join waitlist (rate-limited; duplicate email returns 200 without revealing it exists) | `lib/waitlist/actions.ts` → `joinWaitlist` |
+| POST `/waitlist` `{ name, email, role: "shopper" \| "brand", city? }` | Join waitlist (rate-limited; duplicate email returns 200 without revealing it exists) | `lib/waitlist/actions.ts` → `joinWaitlist` |
 
 ## Auth and me
 

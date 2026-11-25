@@ -8,6 +8,8 @@ import type { AdminRole } from "@/lib/types";
 
 const ROLES = Object.keys(ADMIN_ROLE_PERMISSIONS) as AdminRole[];
 
+export const metadata = { title: "Settings & roles" };
+
 export default async function AdminSettingsPage() {
   await requireAdmin("admin.settings.manage");
   const settings = await adminGetSettings();

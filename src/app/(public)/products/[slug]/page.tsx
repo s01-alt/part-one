@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { BadgeCheck, Flag } from "lucide-react";
+import { CommentComposer, ReportButton, SignInToComment } from "@/components/product/viewer-actions";
+import { getCurrentUser } from "@/lib/auth/session";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { AddToCart } from "@/components/product/add-to-cart";
 import { ProductGrid } from "@/components/product/product-card";
@@ -128,12 +131,9 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
             </AccordionItem>
           </Accordion>
 
-          <Link
-            href={`/login?next=/products/${product.slug}`}
-            className="flex w-fit items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground hover:underline"
-          >
-            <Flag className="size-3.5" aria-hidden /> Report this product
-          </Link>
+          <Suspense fallback={<ReportSignInLink slug={product.slug} />}>
+            <ReportSlot slug={product.slug} />
+          </Suspense>
         </div>
       </div>
 
@@ -171,12 +171,9 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
       <section id="comments" className="mt-16 scroll-mt-24">
         <h2 className="mb-6 font-heading text-3xl uppercase sm:text-4xl">Comments</h2>
         <div className="flex max-w-2xl flex-col gap-6">
-          <div className="rounded-md border border-dashed p-4 text-sm">
-            <Link href={`/login?next=/products/${product.slug}`} className="font-medium underline underline-offset-4">
-              Sign in
-            </Link>{" "}
-            to join the conversation.
-          </div>
+          <Suspense fallback={<SignInToComment next={`/products/${product.slug}#comments`} />}>
+            <CommentSlot slug={product.slug} />
+          </Suspense>
           <ul className="flex flex-col gap-5">
             {comments.map((c) => (
               <li key={c.id} className="flex gap-3">
@@ -205,5 +202,29 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
         </section>
       )}
     </div>
+  );
+}
+
+// Session-dependent parts. They read cookies, so they render inside <Suspense>
+// while the rest of the product page stays prerendered.
+
+async function CommentSlot({ slug }: { slug: string }) {
+  const user = await getCurrentUser();
+  return user ? <CommentComposer userName={user.name} /> : <SignInToComment next={`/products/${slug}#comments`} />;
+}
+
+async function ReportSlot({ slug }: { slug: string }) {
+  const user = await getCurrentUser();
+  return user ? <ReportButton /> : <ReportSignInLink slug={slug} />;
+}
+
+function ReportSignInLink({ slug }: { slug: string }) {
+  return (
+    <Link
+      href={`/login?next=${encodeURIComponent(`/products/${slug}`)}`}
+      className="flex w-fit items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground hover:underline"
+    >
+      <Flag className="size-3.5" aria-hidden /> Report this product
+    </Link>
   );
 }

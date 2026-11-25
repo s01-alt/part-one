@@ -413,7 +413,8 @@ export interface PlatformSettings {
 // Pre-launch waitlist (carried over from the GitHub repo's /waitlist page)
 // ---------------------------------------------------------------------------
 
-export type WaitlistRole = "shopper" | "brand" | "creator";
+/** Only brands create content (D-048) — there is no creator role. */
+export type WaitlistRole = "shopper" | "brand";
 
 export interface WaitlistEntry {
   id: string;

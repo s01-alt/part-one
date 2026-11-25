@@ -3,10 +3,13 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PageHeader } from "@/components/app/page-parts";
 import { MockActions } from "@/components/app/mock-actions";
+import { ReviewCard } from "@/components/app/review-card";
 import { StatusBadge } from "@/components/app/status-badge";
 import { requireAdmin } from "@/lib/auth/session";
 import { adminListApplications, adminListBrands } from "@/lib/data/account";
 import { STYLE_LABELS, formatDate } from "@/lib/format";
+
+export const metadata = { title: "Sellers" };
 
 export default async function AdminSellersPage() {
   await requireAdmin("admin.sellers.review");
@@ -21,11 +24,22 @@ export default async function AdminSellersPage() {
         </TabsList>
         <TabsContent value="applications" className="flex flex-col gap-4 pt-6">
           {apps.map((a) => (
-            <article key={a.id} className="flex flex-col gap-3 rounded-lg border bg-card p-5">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <h2 className="text-lg font-semibold">{a.brandName}</h2>
-                <StatusBadge status={a.status} />
-              </div>
+            <ReviewCard
+              key={a.id}
+              title={<h2 className="text-lg font-semibold">{a.brandName}</h2>}
+              initialStatus={a.status}
+              actionsFor={{
+                pending: [
+                  { label: "Start review", to: "under_review" },
+                  { label: "Approve", to: "approved", variant: "default", confirm: `Approve ${a.brandName} and create their storefront?` },
+                  { label: "Reject", to: "rejected", variant: "destructive", confirm: "Reject this application?" },
+                ],
+                under_review: [
+                  { label: "Approve", to: "approved", variant: "default", confirm: `Approve ${a.brandName} and create their storefront?` },
+                  { label: "Reject", to: "rejected", variant: "destructive", confirm: "Reject this application?" },
+                ],
+              }}
+            >
               <p className="text-sm">{a.description}</p>
               <dl className="grid gap-x-6 gap-y-1 text-sm sm:grid-cols-[auto_1fr]">
                 <dt className="text-muted-foreground">Contact</dt>
@@ -41,16 +55,7 @@ export default async function AdminSellersPage() {
                 <dt className="text-muted-foreground">Submitted</dt>
                 <dd>{formatDate(a.submittedAt)}</dd>
               </dl>
-              {(a.status === "pending" || a.status === "under_review") && (
-                <MockActions
-                  actions={[
-                    ...(a.status === "pending" ? [{ label: "Start review", result: "Moved to Under review" }] : []),
-                    { label: "Approve", result: "Approved — storefront created", variant: "default" as const, confirm: `Approve ${a.brandName}?` },
-                    { label: "Reject", result: "Rejected", variant: "destructive" as const, confirm: "Reject this application?" },
-                  ]}
-                />
-              )}
-            </article>
+            </ReviewCard>
           ))}
         </TabsContent>
         <TabsContent value="brands" className="pt-6">

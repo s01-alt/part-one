@@ -398,7 +398,7 @@ A nightly job recomputes them to fix any drift.
 create table waitlist_entries (
   id text primary key,
   name text not null, email citext not null unique,
-  role text not null check (role in ('shopper','brand','creator')),
+  role text not null check (role in ('shopper','brand')),   -- no creator role (D-048)
   city text, source text,                       -- e.g. 'home', 'waitlist_page'
   invited_at timestamptz, created_at timestamptz not null default now()
 );

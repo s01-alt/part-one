@@ -15,7 +15,7 @@ export type WaitlistResult =
   | { ok: true; stored: boolean }
   | { ok: false; field?: "name" | "email" | "role"; error: string };
 
-const ROLES: WaitlistRole[] = ["shopper", "brand", "creator"];
+const ROLES: WaitlistRole[] = ["shopper", "brand"];
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export async function joinWaitlist(input: {

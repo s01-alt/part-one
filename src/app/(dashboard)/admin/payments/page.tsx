@@ -5,6 +5,8 @@ import { requireAdmin } from "@/lib/auth/session";
 import { adminListOrders, adminListPayouts } from "@/lib/data/account";
 import { formatDate, formatNaira } from "@/lib/format";
 
+export const metadata = { title: "Payments & payouts" };
+
 export default async function AdminPaymentsPage() {
   await requireAdmin("admin.payments.view");
   const [orders, payouts] = await Promise.all([adminListOrders(), adminListPayouts()]);
