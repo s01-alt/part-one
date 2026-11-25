@@ -205,6 +205,8 @@ export interface CatalogFacets {
   styles: { value: StyleTag; count: number }[];
   types: { value: ProductType; count: number }[];
   sizes: string[];
+  /** Sizes grouped so ring, waist and shoe sizes are not mixed in one row. */
+  sizeGroups: { label: string; sizes: string[] }[];
   colors: Color[];
   priceRange: { min: Kobo; max: Kobo };
 }

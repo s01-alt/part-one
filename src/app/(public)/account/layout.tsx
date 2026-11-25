@@ -1,7 +1,10 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import { PageSkeleton } from "@/components/app/page-parts";
 import { SideNav } from "@/components/app/side-nav";
 import { UserMenu } from "@/components/app/user-menu";
+
+export const metadata: Metadata = { title: { default: "Your account", template: "%s — Part One" } };
 
 const NAV = [
   { href: "/account", label: "Overview", exact: true },

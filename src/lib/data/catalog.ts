@@ -191,6 +191,26 @@ export async function getFacets(): Promise<CatalogFacets> {
     return Number(a) - Number(b) || a.localeCompare(b);
   });
 
+  // Group sizes by what they measure, based on the product type they belong to.
+  const groupOf = (p: Product, size: string): string => {
+    if (!/^\d+$/.test(size)) return size === "One size" ? "One size" : "Clothing";
+    if (p.type === "sneakers") return "Shoes";
+    if (p.type === "accessory") return "Rings";
+    return "Waist";
+  };
+  const GROUP_ORDER = ["Clothing", "Waist", "Shoes", "Rings", "One size"];
+  const groups = new Map<string, Set<string>>();
+  for (const p of listed)
+    for (const v of p.variants) {
+      const g = groupOf(p, v.size);
+      if (!groups.has(g)) groups.set(g, new Set());
+      groups.get(g)!.add(v.size);
+    }
+  const sizeGroups = GROUP_ORDER.filter((g) => groups.has(g)).map((label) => ({
+    label,
+    sizes: sizes.filter((s) => groups.get(label)!.has(s)),
+  }));
+
   const colorMap = new Map<string, Color>();
   for (const p of listed) for (const v of p.variants) colorMap.set(v.color.name, v.color);
 
@@ -202,6 +222,7 @@ export async function getFacets(): Promise<CatalogFacets> {
     styles: [...styleCounts].map(([value, n]) => ({ value, count: n })),
     types: [...typeCounts].map(([value, n]) => ({ value, count: n })),
     sizes,
+    sizeGroups,
     colors: [...colorMap.values()],
     priceRange: { min: Math.min(...prices), max: Math.max(...prices) },
   };

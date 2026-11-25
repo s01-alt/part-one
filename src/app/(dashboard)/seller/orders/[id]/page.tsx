@@ -1,11 +1,16 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Panel, PageHeader } from "@/components/app/page-parts";
-import { StatusTimeline } from "@/components/account/status-timeline";
 import { ProductArt } from "@/components/product/product-art";
-import { OrderStatusControl } from "@/components/seller/order-status-control";
+import { LiveStatusTimeline, OrderStatusControl, OrderStatusProvider } from "@/components/seller/order-status-control";
 import { requireSeller } from "@/lib/auth/session";
 import { getSellerOrder } from "@/lib/data/account";
 import { formatDate, formatNaira } from "@/lib/format";
+
+export async function generateMetadata({ params }: PageProps<"/seller/orders/[id]">): Promise<Metadata> {
+  const { id } = await params;
+  return { title: `Order #${id.replace("so_", "").replace("_", "-")}` };
+}
 
 export default async function SellerOrderPage({ params }: PageProps<"/seller/orders/[id]">) {
   const { id } = await params;
@@ -17,10 +22,11 @@ export default async function SellerOrderPage({ params }: PageProps<"/seller/ord
   return (
     <>
       <PageHeader title={`Order #${order.number}`} description={`Placed ${formatDate(order.createdAt)}`} />
+      <OrderStatusProvider history={order.history}>
       <div className="grid gap-6 xl:grid-cols-[1fr_340px]">
         <div className="flex flex-col gap-6">
           <Panel title="Progress">
-            <StatusTimeline history={order.history} />
+            <LiveStatusTimeline />
           </Panel>
           <Panel title="Items to pack">
             <ul className="flex flex-col gap-3">
@@ -55,7 +61,7 @@ export default async function SellerOrderPage({ params }: PageProps<"/seller/ord
         </div>
         <div className="flex flex-col gap-6">
           <Panel title="Update status">
-            <OrderStatusControl initial={order.status} />
+            <OrderStatusControl />
           </Panel>
           <Panel title="Ship to">
             <p className="text-sm">
@@ -71,6 +77,7 @@ export default async function SellerOrderPage({ params }: PageProps<"/seller/ord
           </Panel>
         </div>
       </div>
+      </OrderStatusProvider>
     </>
   );
 }

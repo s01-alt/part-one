@@ -1,8 +1,11 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import { DashboardShell } from "@/components/app/dashboard-shell";
 import { SideNav, type NavItem } from "@/components/app/side-nav";
 import { can, type Permission } from "@/lib/auth/permissions";
 import { getCurrentUser } from "@/lib/auth/session";
+
+export const metadata: Metadata = { title: { default: "Admin", template: "%s — Part One" } };
 
 const NAV: (NavItem & { permission: Permission })[] = [
   { href: "/admin", label: "Overview", exact: true, permission: "admin.dashboard.view" },

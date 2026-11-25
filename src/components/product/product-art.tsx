@@ -74,7 +74,7 @@ export function ProductArt({
     <div
       role="img"
       aria-label={label}
-      className={cn("relative flex items-center justify-center overflow-hidden", className)}
+      className={cn("relative flex items-center justify-center overflow-hidden ring-1 ring-inset ring-black/5", className)}
       style={{ backgroundColor: tone }}
     >
       <div

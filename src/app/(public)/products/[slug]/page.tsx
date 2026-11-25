@@ -54,7 +54,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
         / <span className="text-foreground">{product.name}</span>
       </nav>
 
-      <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
         <ProductGallery images={product.images} type={product.type} tone={product.tone} />
 
         <div className="flex flex-col gap-6">

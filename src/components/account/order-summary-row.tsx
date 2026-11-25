@@ -14,7 +14,7 @@ export function OrderSummaryRow({ order }: { order: MarketplaceOrder }) {
       <div className="flex flex-1 flex-col gap-1">
         <span className="font-semibold">Order #{order.number}</span>
         <span className="text-sm text-muted-foreground">
-          {formatDate(order.createdAt)} · {items} items · {order.sellerOrders.length}{" "}
+          {formatDate(order.createdAt)} · {items} {items === 1 ? "item" : "items"} · {order.sellerOrders.length}{" "}
           {order.sellerOrders.length === 1 ? "brand" : "brands"}
         </span>
         <div className="flex flex-wrap gap-2 pt-1">

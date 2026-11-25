@@ -1,5 +1,8 @@
+import type { Metadata } from "next";
 import { DashboardShell } from "@/components/app/dashboard-shell";
 import { SideNav } from "@/components/app/side-nav";
+
+export const metadata: Metadata = { title: { default: "Seller dashboard", template: "%s — Part One" } };
 
 const NAV = [
   { href: "/seller", label: "Overview", exact: true },

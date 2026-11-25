@@ -1,3 +1,4 @@
+import { formatNaira } from "@/lib/format";
 import { brands } from "@/lib/mock/brands";
 import { products } from "@/lib/mock/products";
 import type {
@@ -200,7 +201,7 @@ export const notificationsByUser: Record<string, Notification[]> = {
   usr_customer: [
     { id: "ntf_1", type: "order_status", title: "Order 1007-A shipped", body: "Eko Static shipped your Low-Rise Parachute Cargo.", href: "/account/orders/ord_1007", readAt: null, createdAt: "2026-11-24T10:00:00Z" },
     { id: "ntf_2", type: "order_status", title: "Order 1007-B is being prepared", body: "Harmattan Studio is processing your order.", href: "/account/orders/ord_1007", readAt: null, createdAt: "2026-11-21T09:00:00Z" },
-    { id: "ntf_3", type: "order_paid", title: "Payment received", body: "We received ₦167,700 for order 1007.", href: "/account/orders/ord_1007", readAt: "2026-11-19T10:00:00Z", createdAt: "2026-11-19T09:26:00Z" },
+    { id: "ntf_3", type: "order_paid", title: "Payment received", body: `We received ${formatNaira(orders.find((o) => o.number === "1007")!.total)} for order 1007.`, href: "/account/orders/ord_1007", readAt: "2026-11-19T10:00:00Z", createdAt: "2026-11-19T09:26:00Z" },
     { id: "ntf_4", type: "refund", title: "Order 1006 cancelled", body: "Your refund has been sent to your card.", href: "/account/orders/ord_1006", readAt: "2026-11-17T14:00:00Z", createdAt: "2026-11-17T13:00:00Z" },
   ],
   usr_seller: [

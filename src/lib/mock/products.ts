@@ -1,3 +1,4 @@
+import { brands } from "@/lib/mock/brands";
 import type {
   Color,
   Product,
@@ -204,3 +205,18 @@ export const comments: ProductComment[] = products.flatMap((p) => {
     createdAt: "2026-11-2" + ((h + i) % 4) + "T18:00:00Z",
   }));
 });
+
+// Keep counts consistent with the mock reviews/comments actually listed on the page.
+for (const p of products) {
+  const pr = reviews.filter((r) => r.productId === p.id);
+  p.ratingCount = pr.length;
+  p.ratingAvg = pr.length ? Math.round((pr.reduce((n, r) => n + r.rating, 0) / pr.length) * 10) / 10 : 0;
+  p.counts.comments = comments.filter((c) => c.productId === p.id).length;
+}
+
+// Brand rating is derived from its products' reviews (PRD §18: no separate seller rating).
+for (const b of brands) {
+  const br = reviews.filter((r) => products.find((p) => p.id === r.productId)?.brandId === b.id);
+  b.ratingCount = br.length;
+  b.ratingAvg = br.length ? Math.round((br.reduce((n, r) => n + r.rating, 0) / br.length) * 10) / 10 : 0;
+}

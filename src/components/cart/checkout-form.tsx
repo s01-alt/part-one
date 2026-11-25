@@ -1,14 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { MockNotice } from "@/components/app/page-parts";
 import { formatNaira } from "@/lib/format";
 import { computeTotals, useCart, useCartHydrated } from "@/lib/store/cart";
+
+export const PREVIEW_ORDER_KEY = "partone-preview-order";
 
 const STATES = [
   "Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", "Borno", "Cross River", "Delta",
@@ -29,7 +30,8 @@ const STATES = [
 export function CheckoutForm({ defaultName }: { defaultName: string }) {
   const hydrated = useCartHydrated();
   const lines = useCart((s) => s.lines);
-  const [submitted, setSubmitted] = useState(false);
+  const clear = useCart((s) => s.clear);
+  const router = useRouter();
 
   if (!hydrated) return <div className="h-96 animate-pulse rounded-lg bg-muted" />;
   if (!lines.length) {
@@ -50,7 +52,21 @@ export function CheckoutForm({ defaultName }: { defaultName: string }) {
       className="grid gap-10 lg:grid-cols-[1fr_380px]"
       onSubmit={(e) => {
         e.preventDefault();
-        setSubmitted(true);
+        // PREVIEW: real flow redirects to Paystack and confirms via webhook.
+        const fd = new FormData(e.currentTarget);
+        try {
+          sessionStorage.setItem(
+            PREVIEW_ORDER_KEY,
+            JSON.stringify({
+              totals,
+              address: { name: fd.get("fullName"), line1: fd.get("line1"), city: fd.get("city"), state: fd.get("state") },
+            }),
+          );
+        } catch {
+          // storage unavailable — confirmation page shows a generic message
+        }
+        clear();
+        router.push("/checkout/confirmation");
       }}
     >
       <fieldset className="flex flex-col gap-5">
@@ -70,7 +86,7 @@ export function CheckoutForm({ defaultName }: { defaultName: string }) {
               name="state"
               required
               defaultValue="Lagos"
-              className="h-10 rounded-md border border-input bg-card px-3 text-sm"
+              className="h-10 rounded-md border border-input bg-transparent px-3 text-sm"
             >
               {STATES.map((s) => (
                 <option key={s}>{s}</option>
@@ -113,15 +129,9 @@ export function CheckoutForm({ defaultName }: { defaultName: string }) {
         <Button type="submit" variant="brand" className="mt-5 h-12 w-full text-sm">
           <Lock data-icon="inline-start" /> Pay {formatNaira(totals.total)} with Paystack
         </Button>
-        <div className="mt-3" aria-live="polite">
-          {submitted ? (
-            <MockNotice>Paystack is not connected yet. In production you would now be sent to Paystack to pay.</MockNotice>
-          ) : (
-            <p className="text-center text-xs text-muted-foreground">
-              Stock is confirmed when Part One receives your payment.
-            </p>
-          )}
-        </div>
+        <p className="mt-3 text-center text-xs text-muted-foreground">
+          Preview: Paystack isn&apos;t connected, so no payment is taken.
+        </p>
       </aside>
     </form>
   );

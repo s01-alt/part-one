@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/app/page-parts";
@@ -8,6 +9,11 @@ import { ProductArt } from "@/components/product/product-art";
 import { requireUser } from "@/lib/auth/session";
 import { getMyOrder } from "@/lib/data/account";
 import { formatDate, formatNaira } from "@/lib/format";
+
+export async function generateMetadata({ params }: PageProps<"/account/orders/[id]">): Promise<Metadata> {
+  const { id } = await params;
+  return { title: `Order #${id.replace("ord_", "").replace("_", "-")}` };
+}
 
 export default async function OrderDetailPage({ params }: PageProps<"/account/orders/[id]">) {
   const { id } = await params;
@@ -68,7 +74,11 @@ export default async function OrderDetailPage({ params }: PageProps<"/account/or
                   <dt className="font-medium">Subtotal</dt>
                   <dd className="font-medium">{formatNaira(so.total)}</dd>
                 </dl>
-                <SellerOrderActions status={so.status} productNames={so.lines.map((l) => l.productName)} />
+                <SellerOrderActions
+                  status={so.status}
+                  productNames={so.lines.map((l) => l.productName)}
+                  refundAmount={so.total}
+                />
               </div>
             </section>
           ))}

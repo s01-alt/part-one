@@ -38,7 +38,7 @@ function SectionHeader({ title, href, linkLabel }: { title: string; href: string
 export default async function HomePage() {
   const [drops, brands, facets] = await Promise.all([listNewDrops(8), listBrands(), getFacets()]);
   const styleCount = new Map(facets.styles.map((s) => [s.value, s.count]));
-  const heroPieces = drops.slice(0, 2);
+  const heroPieces = drops.filter((p, i) => drops.findIndex((q) => q.type === p.type) === i).slice(0, 2);
 
   return (
     <>
@@ -74,7 +74,7 @@ export default async function HomePage() {
       {/* Shop by style */}
       <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
         <SectionHeader title="Shop by style" href="/shop" linkLabel="View all" />
-        <ul className="-mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
+        <ul className="no-scrollbar -mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
           {STYLE_TAGS.map((s) => (
             <li key={s} className="w-[44%] shrink-0 snap-start sm:w-[30%] lg:w-[calc((100%-64px)/5)]">
               <Link href={`/shop?style=${s}`} className="group block">

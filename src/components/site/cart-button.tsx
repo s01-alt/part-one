@@ -21,7 +21,7 @@ export function CartButton() {
     <Link
       href="/cart"
       className="relative inline-flex size-10 items-center justify-center rounded-sm text-ink-foreground transition-colors hover:bg-ink-2"
-      aria-label={count ? `Cart, ${count} items` : "Cart"}
+      aria-label={count ? `Cart, ${count} ${count === 1 ? "item" : "items"}` : "Cart"}
     >
       <ShoppingBag className="size-5" aria-hidden />
       {count > 0 && (

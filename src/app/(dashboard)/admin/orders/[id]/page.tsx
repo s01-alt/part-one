@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Panel, PageHeader } from "@/components/app/page-parts";
 import { MockActions } from "@/components/app/mock-actions";
@@ -7,6 +8,11 @@ import { can } from "@/lib/auth/permissions";
 import { requireAdmin } from "@/lib/auth/session";
 import { adminGetOrder } from "@/lib/data/account";
 import { formatDate, formatNaira } from "@/lib/format";
+
+export async function generateMetadata({ params }: PageProps<"/admin/orders/[id]">): Promise<Metadata> {
+  const { id } = await params;
+  return { title: `Order #${id.replace("ord_", "").replace("_", "-")}` };
+}
 
 export default async function AdminOrderPage({ params }: PageProps<"/admin/orders/[id]">) {
   const { id } = await params;

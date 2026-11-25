@@ -46,9 +46,9 @@ export function SocialBar({
   }
 
   const items = [
-    { label: liked ? "Unlike" : "Like", icon: Heart, on: liked, count: counts.likes + (liked ? 1 : 0), onClick: () => toggle("liked", productId) },
-    { label: saved ? "Unsave" : "Save", icon: Bookmark, on: saved, count: counts.saves + (saved ? 1 : 0), onClick: () => toggle("saved", productId) },
-    { label: reposted ? "Undo repost" : "Repost", icon: Repeat2, on: reposted, count: counts.reposts + (reposted ? 1 : 0), onClick: () => toggle("reposted", productId) },
+    { label: liked ? "Liked" : "Like", icon: Heart, on: liked, count: counts.likes + (liked ? 1 : 0), onClick: () => toggle("liked", productId) },
+    { label: saved ? "Saved" : "Save", icon: Bookmark, on: saved, count: counts.saves + (saved ? 1 : 0), onClick: () => toggle("saved", productId) },
+    { label: reposted ? "Reposted" : "Repost", icon: Repeat2, on: reposted, count: counts.reposts + (reposted ? 1 : 0), onClick: () => toggle("reposted", productId) },
     { label: copied ? "Link copied" : "Share", icon: Share2, on: false, count: counts.shares, onClick: share },
   ];
 
@@ -65,7 +65,7 @@ export function SocialBar({
             on && "border-foreground bg-foreground text-background",
           )}
         >
-          <Icon className={cn("size-4", on && label.startsWith("Un") && "fill-current")} aria-hidden />
+          <Icon className={cn("size-4", on && "fill-current")} aria-hidden />
           <span>{label}</span>
           <span className={cn("text-xs", on ? "text-background/70" : "text-muted-foreground")}>{formatCount(count)}</span>
         </button>

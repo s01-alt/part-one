@@ -89,26 +89,31 @@ function FilterPanel({ state, facets }: { state: ShopUrlState; facets: CatalogFa
 
       <AccordionItem value="size">
         <AccordionTrigger>Size (in stock)</AccordionTrigger>
-        <AccordionContent>
-          <div className="flex flex-wrap gap-2">
-            {facets.sizes.map((s) => {
-              const on = state.size.includes(s);
-              return (
-                <button
-                  key={s}
-                  type="button"
-                  aria-pressed={on}
-                  onClick={() => toggle("size", s)}
-                  className={cn(
-                    "min-w-11 rounded-md border px-2 py-1.5 text-sm",
-                    on ? "border-foreground bg-foreground text-background" : "hover:border-foreground",
-                  )}
-                >
-                  {s}
-                </button>
-              );
-            })}
-          </div>
+        <AccordionContent className="flex flex-col gap-4">
+          {facets.sizeGroups.map((g) => (
+            <div key={g.label} role="group" aria-label={`${g.label} sizes`}>
+              <p className="mb-2 text-xs text-muted-foreground">{g.label}</p>
+              <div className="flex flex-wrap gap-2">
+                {g.sizes.map((s) => {
+                  const on = state.size.includes(s);
+                  return (
+                    <button
+                      key={s}
+                      type="button"
+                      aria-pressed={on}
+                      onClick={() => toggle("size", s)}
+                      className={cn(
+                        "min-w-11 rounded-md border px-2 py-1.5 text-sm",
+                        on ? "border-foreground bg-foreground text-background" : "hover:border-foreground",
+                      )}
+                    >
+                      {s}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </AccordionContent>
       </AccordionItem>
 

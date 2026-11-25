@@ -43,6 +43,7 @@ export function WaitlistForm({ tone = "light" }: { tone?: "light" | "dark" }) {
   return (
     <form
       noValidate
+      onChange={() => error && setError(null)}
       className={cn("grid gap-5", dark && "text-ink-foreground")}
       onSubmit={(e) => {
         e.preventDefault();
