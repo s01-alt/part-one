@@ -16,8 +16,8 @@ const NAV = [
 
 export default function AccountLayout({ children }: LayoutProps<"/account">) {
   return (
-    <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-[200px_1fr]">
-      <div className="flex flex-col gap-6">
+    <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)] gap-8 px-4 py-10 sm:px-6 md:grid-cols-[200px_minmax(0,1fr)]">
+      <div className="flex min-w-0 flex-col gap-6">
         <Suspense fallback={<div className="h-8 animate-pulse rounded bg-muted" />}>
           <UserMenu />
         </Suspense>

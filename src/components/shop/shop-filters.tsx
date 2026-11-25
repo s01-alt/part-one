@@ -7,7 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { STYLE_LABELS, TYPE_LABELS } from "@/lib/format";
 import { activeFilterCount, buildShopHref, type ShopUrlState } from "@/lib/data/query";
 import type { CatalogFacets, ProductType, StyleTag } from "@/lib/types";
@@ -27,7 +27,15 @@ function useShopNavigation(state: ShopUrlState) {
   return { go, toggle, pending };
 }
 
-function FilterPanel({ state, facets }: { state: ShopUrlState; facets: CatalogFacets }) {
+function FilterPanel({
+  state,
+  facets,
+  defaultOpen = ["style", "type", "size", "price"],
+}: {
+  state: ShopUrlState;
+  facets: CatalogFacets;
+  defaultOpen?: string[];
+}) {
   const { go, toggle } = useShopNavigation(state);
 
   const priceBands = [
@@ -38,7 +46,7 @@ function FilterPanel({ state, facets }: { state: ShopUrlState; facets: CatalogFa
   ];
 
   return (
-    <Accordion type="multiple" defaultValue={["style", "type", "size", "price"]} className="w-full">
+    <Accordion type="multiple" defaultValue={defaultOpen} className="w-full">
       <AccordionItem value="style">
         <AccordionTrigger>Style</AccordionTrigger>
         <AccordionContent className="flex flex-col gap-2">
@@ -254,28 +262,35 @@ export function ShopToolbar({
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-muted-foreground" aria-live="polite">
           {pending ? "Updating…" : `${total} ${total === 1 ? "product" : "products"}`}
         </p>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 sm:w-auto">
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="outline" className="h-10 lg:hidden">
+              <Button variant="outline" className="h-10 flex-1 sm:flex-none lg:hidden">
                 <SlidersHorizontal data-icon="inline-start" /> Filters{count ? ` (${count})` : ""}
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-[85vw] max-w-sm overflow-y-auto">
-              <SheetHeader>
-                <SheetTitle>Filters</SheetTitle>
+            <SheetContent side="left" className="flex w-[88vw] max-w-sm flex-col gap-0">
+              <SheetHeader className="border-b">
+                <SheetTitle>Filters{count ? ` (${count})` : ""}</SheetTitle>
               </SheetHeader>
-              <div className="px-4 pb-8">
-                <FilterPanel state={state} facets={facets} />
+              <div className="flex-1 overflow-y-auto px-4 pb-6">
+                <FilterPanel state={state} facets={facets} defaultOpen={["style"]} />
               </div>
+              <SheetFooter className="border-t">
+                <SheetClose asChild>
+                  <Button className="h-11 w-full">
+                    {pending ? "Updating…" : `Show ${total} ${total === 1 ? "product" : "products"}`}
+                  </Button>
+                </SheetClose>
+              </SheetFooter>
             </SheetContent>
           </Sheet>
           <Select value={state.sort ?? (state.q ? "relevance" : "newest")} onValueChange={(v) => go({ ...state, sort: v })}>
-            <SelectTrigger className="h-10 w-44" aria-label="Sort products">
+            <SelectTrigger className="h-10 flex-1 sm:w-44 sm:flex-none" aria-label="Sort products">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>

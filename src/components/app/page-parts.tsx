@@ -33,9 +33,9 @@ export function StatCard({
   className?: string;
 }) {
   return (
-    <div className={cn("flex flex-col gap-1 rounded-lg border bg-card p-5", className)}>
+    <div className={cn("flex min-w-0 flex-col gap-1 rounded-lg border bg-card p-4 sm:p-5", className)}>
       <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{label}</span>
-      <span className="text-2xl font-semibold">{value}</span>
+      <span className="text-xl font-semibold sm:text-2xl">{value}</span>
       {hint && <span className="text-xs text-muted-foreground">{hint}</span>}
     </div>
   );

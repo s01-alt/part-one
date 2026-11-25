@@ -44,9 +44,9 @@ export default async function HomePage() {
     <>
       {/* Hero */}
       <section className="bg-ink text-ink-foreground">
-        <div className="mx-auto grid max-w-7xl gap-14 px-4 py-20 sm:px-6 md:py-28 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:gap-14 sm:px-6 md:py-28 lg:grid-cols-[1.1fr_1fr] lg:items-center">
           <div className="flex flex-col gap-7">
-            <h1 className="font-heading text-6xl uppercase leading-[0.9] sm:text-7xl">
+            <h1 className="font-heading text-5xl uppercase leading-[0.9] sm:text-7xl">
               Discover Nigerian
               <br />
               streetwear
@@ -65,7 +65,7 @@ export default async function HomePage() {
           </div>
           <div className="grid grid-cols-2 gap-4" aria-hidden>
             {heroPieces.map((p, i) => (
-              <ProductArt key={p.id} type={p.type} tone={p.tone} variant={i} className="aspect-[3/4] rounded-sm" />
+              <ProductArt key={p.id} type={p.type} tone={p.tone} variant={i} className="aspect-square rounded-sm sm:aspect-[3/4]" />
             ))}
           </div>
         </div>
@@ -74,7 +74,7 @@ export default async function HomePage() {
       {/* Shop by style */}
       <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
         <SectionHeader title="Shop by style" href="/shop" linkLabel="View all" />
-        <ul className="no-scrollbar -mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">
+        <ul className="no-scrollbar -mx-4 flex snap-x scroll-px-4 gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:scroll-px-0 sm:px-0">
           {STYLE_TAGS.map((s) => (
             <li key={s} className="w-[44%] shrink-0 snap-start sm:w-[30%] lg:w-[calc((100%-64px)/5)]">
               <Link href={`/shop?style=${s}`} className="group block">

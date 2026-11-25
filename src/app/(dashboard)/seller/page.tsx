@@ -31,7 +31,7 @@ export default async function SellerOverviewPage() {
   return (
     <>
       <PageHeader title={brand?.name ?? "Your store"} description="Sales, orders and payouts at a glance." />
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
         <StatCard label="Sales (all time)" value={formatNaira(revenue)} hint={`${counted.length} orders`} />
         <StatCard label="To ship" value={toShip.length} hint="Paid or processing" />
         <StatCard label="Available balance" value={formatNaira(balance.available)} hint="From delivered orders" />

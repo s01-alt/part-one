@@ -24,7 +24,7 @@ export default async function AdminOverviewPage({ searchParams }: PageProps<"/ad
           Your role doesn&apos;t have access to that section.
         </p>
       )}
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
         <StatCard label="GMV (items)" value={formatNaira(gmv)} hint={`${orders.length} marketplace orders`} />
         <StatCard label="Commission earned" value={formatNaira(commission)} />
         <StatCard label="Seller applications" value={pendingApps} hint="Pending or under review" />

@@ -32,8 +32,8 @@ const COLUMNS = [
 export function SiteFooter() {
   return (
     <footer className="mt-auto bg-ink text-ink-foreground">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-[1.5fr_repeat(3,1fr)]">
-        <div className="flex flex-col gap-3">
+      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-10 px-4 py-14 sm:px-6 md:grid-cols-[1.5fr_repeat(3,1fr)]">
+        <div className="col-span-2 flex flex-col gap-3 md:col-span-1">
           <Logo className="text-3xl" />
           <p className="max-w-xs text-sm text-ink-muted">The home of Nigerian streetwear.</p>
         </div>

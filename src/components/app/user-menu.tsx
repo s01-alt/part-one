@@ -24,7 +24,7 @@ export async function UserMenu({ tone = "light" }: { tone?: "light" | "dark" }) 
       >
         {user.name.slice(0, 1)}
       </span>
-      <span className="hidden flex-col leading-tight sm:flex">
+      <span className={dark ? "hidden flex-col leading-tight sm:flex" : "flex flex-col leading-tight"}>
         <span className="text-sm font-medium">{user.name}</span>
         <span className={dark ? "text-xs text-ink-muted" : "text-xs text-muted-foreground"}>{role}</span>
       </span>

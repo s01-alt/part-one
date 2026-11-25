@@ -24,7 +24,7 @@ export default async function SellerPayoutsPage() {
         title="Payouts"
         description="Earnings from delivered orders are paid to your bank once your available balance reaches ₦50,000."
       />
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3">
         <StatCard label="Pending" value={formatNaira(balance.pending)} hint="Orders not yet delivered" />
         <StatCard label="Available" value={formatNaira(balance.available)} hint="Ready for payout" />
         <StatCard label="Paid out" value={formatNaira(balance.paidOut)} hint="All time" />

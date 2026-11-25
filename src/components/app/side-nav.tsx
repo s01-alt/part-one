@@ -32,7 +32,7 @@ function ActiveSideNav(props: { items: NavItem[]; label: string }) {
 
 function NavLinks({ items, label, pathname }: { items: NavItem[]; label: string; pathname: string | null }) {
   return (
-    <nav aria-label={label} className="flex gap-1 overflow-x-auto md:flex-col md:overflow-visible">
+    <nav aria-label={label} className="no-scrollbar -mx-1 flex gap-1 overflow-x-auto px-1 md:mx-0 md:flex-col md:overflow-visible md:px-0">
       {items.map((item) => {
         const active =
           pathname !== null &&

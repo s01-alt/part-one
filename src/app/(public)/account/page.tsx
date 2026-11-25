@@ -18,7 +18,7 @@ export default async function AccountOverviewPage() {
   return (
     <>
       <PageHeader title={`Hi, ${user.name.split(" ")[0]}`} description="Your orders, saved pieces and brands." />
-      <div className="grid gap-4 sm:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
         <StatCard label="Active orders" value={active.length} />
         <StatCard label="Saved" value={saved.saved.length} />
         <StatCard label="Following" value={following.length} />

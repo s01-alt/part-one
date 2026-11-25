@@ -40,7 +40,7 @@ export function ProductCard({ product }: { product: ProductWithBrand }) {
       </div>
       <div className="flex flex-1 flex-col gap-1 pt-3">
         <span className="text-xs text-muted-foreground">{product.brand.name}</span>
-        <span className="line-clamp-1 font-medium group-hover:underline">{product.name}</span>
+        <span className="line-clamp-2 font-medium leading-snug group-hover:underline sm:line-clamp-1">{product.name}</span>
         <div className="mt-1 flex items-center justify-between gap-2">
           <span>{formatNaira(product.price)}</span>
           <span className="flex items-center gap-1 text-xs text-muted-foreground">

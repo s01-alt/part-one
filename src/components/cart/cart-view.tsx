@@ -31,7 +31,7 @@ export function CartView() {
   const totals = computeTotals(lines);
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[1fr_360px]">
+    <div className="grid gap-10 pb-24 lg:grid-cols-[minmax(0,1fr)_360px] lg:pb-0">
       <div className="flex flex-col gap-8">
         {totals.groups.length > 1 && (
           <p className="rounded-md bg-secondary p-3 text-sm">
@@ -47,7 +47,7 @@ export function CartView() {
                   {g.brandName}
                 </Link>
               </h2>
-              <span className="text-xs text-muted-foreground">Ships separately</span>
+              <span className="hidden text-xs text-muted-foreground sm:inline">Ships separately</span>
             </header>
             <ul className="divide-y">
               {g.lines.map((l) => (
@@ -128,6 +128,19 @@ export function CartView() {
           Secure payment with Paystack. Stock is confirmed when your payment is received.
         </p>
       </aside>
+
+      {/* Phones: keep the total and Check out within reach */}
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t bg-background/95 px-4 py-3 backdrop-blur lg:hidden">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
+          <span className="flex flex-col leading-tight">
+            <span className="text-xs text-muted-foreground">Total incl. VAT & delivery</span>
+            <span className="font-semibold">{formatNaira(totals.total)}</span>
+          </span>
+          <Button asChild variant="brand" className="h-11 px-6 text-sm">
+            <Link href="/checkout">Check out</Link>
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }
