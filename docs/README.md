@@ -26,11 +26,11 @@ provide to make it real.
 ## Repository layout
 
 ```
-Part One/
-├── docs/          ← you are here
-└── web/           ← Next.js frontend (mock data until the API exists)
-    # planned, not created yet:
-    # api/         ← backend (after stack approval)
+Part One/  (GitHub: s01-alt/part-one)
+├── docs/          ← you are here (design/homepage-inspo.png = brand reference)
+├── src/           ← Next.js frontend (mock data until the API exists)
+├── public/
+└── package.json …  app config at the repo root (Vercel deploys from here)
 ```
 
 ## Conventions

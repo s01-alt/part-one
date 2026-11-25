@@ -3,21 +3,31 @@
 import { useState } from "react";
 import { Bookmark, Heart, MessageCircle, Repeat2, Share2 } from "lucide-react";
 import { formatCount } from "@/lib/format";
+import { useEngagement } from "@/lib/store/engagement";
 import type { SocialCounts } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 /**
  * Like / save / repost / share actions.
  *
- * MOCK: toggles are local state only. With the backend:
+ * MOCK: likes/saves/reposts persist in this browser only (lib/store/engagement.ts). With the backend:
  *  - like/save/repost → PUT|DELETE /v1/products/:id/{like|save|repost}
  *    (optimistic update via TanStack Query; a 401 response sends the user to /login)
  *  - share → POST /v1/products/:id/shares { channel } for analytics, then the native share sheet
  */
-export function SocialBar({ counts, productName }: { counts: SocialCounts; productName: string }) {
-  const [liked, setLiked] = useState(false);
-  const [saved, setSaved] = useState(false);
-  const [reposted, setReposted] = useState(false);
+export function SocialBar({
+  productId,
+  counts,
+  productName,
+}: {
+  productId: string;
+  counts: SocialCounts;
+  productName: string;
+}) {
+  const liked = useEngagement((s) => s.liked.includes(productId));
+  const saved = useEngagement((s) => s.saved.includes(productId));
+  const reposted = useEngagement((s) => s.reposted.includes(productId));
+  const toggle = useEngagement((s) => s.toggle);
   const [copied, setCopied] = useState(false);
 
   async function share() {
@@ -36,9 +46,9 @@ export function SocialBar({ counts, productName }: { counts: SocialCounts; produ
   }
 
   const items = [
-    { label: liked ? "Unlike" : "Like", icon: Heart, on: liked, count: counts.likes + (liked ? 1 : 0), onClick: () => setLiked((v) => !v) },
-    { label: saved ? "Unsave" : "Save", icon: Bookmark, on: saved, count: counts.saves + (saved ? 1 : 0), onClick: () => setSaved((v) => !v) },
-    { label: reposted ? "Undo repost" : "Repost", icon: Repeat2, on: reposted, count: counts.reposts + (reposted ? 1 : 0), onClick: () => setReposted((v) => !v) },
+    { label: liked ? "Unlike" : "Like", icon: Heart, on: liked, count: counts.likes + (liked ? 1 : 0), onClick: () => toggle("liked", productId) },
+    { label: saved ? "Unsave" : "Save", icon: Bookmark, on: saved, count: counts.saves + (saved ? 1 : 0), onClick: () => toggle("saved", productId) },
+    { label: reposted ? "Undo repost" : "Repost", icon: Repeat2, on: reposted, count: counts.reposts + (reposted ? 1 : 0), onClick: () => toggle("reposted", productId) },
     { label: copied ? "Link copied" : "Share", icon: Share2, on: false, count: counts.shares, onClick: share },
   ];
 

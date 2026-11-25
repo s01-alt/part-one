@@ -1,7 +1,7 @@
 # API contract — DRAFT
 
 > REST + JSON, versioned under `/v1`. Draft until the stack is approved. Each
-> endpoint lists the frontend function in `web/src/lib/data/*` (or component)
+> endpoint lists the frontend function in `src/lib/data/*` (or component)
 > that will call it, so wiring the frontend is mechanical.
 
 ## Conventions
@@ -29,6 +29,12 @@
 | GET `/brands` · GET `/brands/:slug` | Brands, storefront | `catalog.listBrands`, `getBrand` |
 | GET `/brands/:slug/products` · `/collections` | Storefront contents | `listBrandProducts`, `listBrandCollections` |
 | GET `/feed/reposts` | Global repost feed (cursor pagination) | `account.listRepostFeed` |
+
+## Pre-launch
+
+| Method & path | Purpose | Frontend caller |
+|---|---|---|
+| POST `/waitlist` `{ name, email, role, city? }` | Join waitlist (rate-limited; duplicate email returns 200 without revealing it exists) | `lib/waitlist/actions.ts` → `joinWaitlist` |
 
 ## Auth and me
 

@@ -1,6 +1,6 @@
 # Authentication, RBAC and data scoping
 
-> Draft. Implements PRD §19 and §25. Frontend counterpart: `web/src/lib/auth/`.
+> Draft. Implements PRD §19 and §25. Frontend counterpart: `src/lib/auth/`.
 
 ## Sign-in (Google only in v1)
 
@@ -36,7 +36,7 @@ A user is always a **customer**. Two optional grants:
 
 ## Admin permission matrix
 
-Single source of truth in code: `web/src/lib/auth/permissions.ts` (to be moved to a
+Single source of truth in code: `src/lib/auth/permissions.ts` (to be moved to a
 shared package used by both web and api). Shown live at `/admin/settings`.
 
 | Permission | Founder | Report Manager | Developer |
@@ -85,7 +85,7 @@ Fields: actor, actor role, action, target, before/after JSON, IP, time.
 
 ## Replacing the mock
 
-`web/src/lib/auth/session.ts` currently trusts a plain `p1_mock_session` cookie
+`src/lib/auth/session.ts` currently trusts a plain `p1_mock_session` cookie
 containing a user ID. **It is insecure by design and must be deleted before any
 deployment** (D-043). Replacement: `getCurrentUser()` calls `GET /v1/me`
 forwarding the request's cookie; `proxy.ts` checks for `p1_session` instead.

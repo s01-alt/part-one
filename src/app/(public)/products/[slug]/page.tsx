@@ -88,7 +88,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
 
           <AddToCart product={product} shippingFee={brand.shippingFee} />
 
-          <SocialBar counts={product.counts} productName={product.name} />
+          <SocialBar productId={product.id} counts={product.counts} productName={product.name} />
 
           <Accordion type="multiple" defaultValue={["details"]}>
             <AccordionItem value="details">

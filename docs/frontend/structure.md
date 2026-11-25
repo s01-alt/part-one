@@ -1,7 +1,7 @@
 # Frontend structure
 
-`web/` is a Next.js 16 App Router app. Next 16 differs from older versions — read
-`web/AGENTS.md` and the bundled docs in `web/node_modules/next/dist/docs/` before
+The app at the repo root is a Next.js 16 App Router app. Next 16 differs from older versions — read
+`AGENTS.md` and the bundled docs in `node_modules/next/dist/docs/` before
 changing framework-level code.
 
 ## Key Next.js 16 rules this codebase follows
@@ -20,7 +20,7 @@ changing framework-level code.
 ## Folders
 
 ```
-web/src/
+src/
 ├── app/
 │   ├── (public)/            marketplace with site header/footer
 │   │   ├── page.tsx         marketing home
@@ -67,7 +67,7 @@ the backend:
 5. Client mutations (like, save, follow, cart, status updates) move to TanStack Query
    mutations with optimistic updates. Components marked `MOCK` or using `MockActions`
    / `MockNotice` are the list of places to wire up:
-   `grep -rn "MOCK\|MockActions\|MockNotice" web/src`.
+   `grep -rn "MOCK\|MockActions\|MockNotice" src`.
 6. Cart: keep Zustand for signed-out users; on sign-in call `POST /v1/cart/merge`
    and switch to the server cart.
 

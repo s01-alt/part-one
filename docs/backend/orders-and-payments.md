@@ -44,7 +44,7 @@ pending_payment ──webhook ok──▶ paid ──seller──▶ processing 
 
 Any other transition → `409 INVALID_TRANSITION`. Every change writes `order_status_events`
 and a notification. The frontend mirrors seller transitions in
-`web/src/components/seller/order-status-control.tsx`.
+`src/components/seller/order-status-control.tsx`.
 
 ## 3. Checkout and Paystack
 

@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Kept from the GitHub repo: lets coding agents draft Next.js issue reports for review (dev only).
+  experimental: {
+    agentFeedback: true,
+  },
   cacheComponents: true,
   partialPrefetching: true,
   reactCompiler: true,

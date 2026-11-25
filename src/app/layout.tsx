@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import { Anton, Archivo, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -27,14 +28,29 @@ const archivo = Archivo({
   subsets: ["latin"],
 });
 
+// Metadata carried over from the GitHub repo (part1.africa).
 export const metadata: Metadata = {
+  metadataBase: new URL("https://part1.africa"),
   title: {
-    default: "Part One — Nigerian streetwear, in one place",
-    template: "%s · Part One",
+    default: "Part One — Nigerian Streetwear, Together",
+    template: "%s — Part One",
   },
   description:
-    "Shop independent Nigerian streetwear brands. Discover new drops, follow the brands you love, and check out from several brands at once.",
+    "Part One is the home of Nigerian streetwear. Discover verified brands, shop the drops, and move with the culture. The Social Marketplace.",
   applicationName: "Part One",
+  keywords: ["Nigerian streetwear", "African fashion", "marketplace", "streetwear brands", "Lagos fashion", "Part One"],
+  openGraph: {
+    title: "Part One — Nigerian Streetwear, Together",
+    description: "Discover verified Nigerian streetwear brands. Shop the drops and move with the culture.",
+    type: "website",
+    locale: "en_NG",
+    siteName: "Part One",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Part One — Nigerian Streetwear, Together",
+    description: "Discover verified Nigerian streetwear brands. Shop the drops and move with the culture.",
+  },
 };
 
 export const viewport: Viewport = {
@@ -45,9 +61,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en-NG"
+      data-scroll-behavior="smooth"
       className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} ${archivo.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

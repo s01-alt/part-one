@@ -72,11 +72,16 @@ export function SiteFooter() {
         <div className="flex flex-col gap-4 border-ink-border lg:border-l lg:pl-10">
           <h2 className="text-lg font-bold uppercase tracking-wide">Stay in the loop</h2>
           <p className="text-sm text-ink-muted">
-            Follow your favourite brands and get notified in the app the moment they drop.
+            Part One opens in Lagos soon. Get early access, then follow your favourite brands and get notified in the app the moment they drop.
           </p>
-          <Button asChild variant="brand" className="h-11 w-fit px-6">
-            <Link href="/login">Create an account</Link>
-          </Button>
+          <div className="flex flex-wrap gap-2">
+            <Button asChild variant="brand" className="h-11 px-6">
+              <Link href="/waitlist">Join the waitlist</Link>
+            </Button>
+            <Button asChild variant="inverse" className="h-11 px-6">
+              <Link href="/login">Sign in</Link>
+            </Button>
+          </div>
           <ul className="flex gap-4 text-sm">
             {SOCIALS.map((s) => (
               <li key={s.label}>
@@ -126,9 +131,10 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-ink-border">
-        <p className="mx-auto max-w-7xl px-4 py-5 text-center text-xs text-ink-muted sm:px-6">
-          © 2026 Part One. All rights reserved. Prices in NGN.
-        </p>
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-ink-muted sm:flex-row sm:justify-between sm:px-6">
+          <p>© 2026 Part One. Made in Lagos, Nigeria. Prices in NGN.</p>
+          <p className="uppercase tracking-widest">The Social Marketplace</p>
+        </div>
       </div>
     </footer>
   );

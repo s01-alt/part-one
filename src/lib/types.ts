@@ -406,3 +406,18 @@ export interface PlatformSettings {
   payoutThreshold: Kobo;
   vatRate: number;
 }
+
+// ---------------------------------------------------------------------------
+// Pre-launch waitlist (carried over from the GitHub repo's /waitlist page)
+// ---------------------------------------------------------------------------
+
+export type WaitlistRole = "shopper" | "brand" | "creator";
+
+export interface WaitlistEntry {
+  id: string;
+  name: string;
+  email: string;
+  role: WaitlistRole;
+  city: string | null;
+  createdAt: ISODate;
+}

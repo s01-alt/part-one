@@ -4,11 +4,13 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { ShoppingBag } from "lucide-react";
 import { useCart, useCartCount } from "@/lib/store/cart";
+import { useEngagement } from "@/lib/store/engagement";
 
-/** Loads the persisted cart once on the client. Render once, in the site header. */
+/** Loads the persisted cart and likes/saves once on the client. Render once, in the site header. */
 export function CartHydrator() {
   useEffect(() => {
     void useCart.persist.rehydrate();
+    void useEngagement.persist.rehydrate();
   }, []);
   return null;
 }

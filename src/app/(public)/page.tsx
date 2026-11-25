@@ -3,6 +3,7 @@ import { ArrowRight, Headset, Lock, ShieldCheck, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductArt } from "@/components/product/product-art";
 import { ProductGrid } from "@/components/product/product-card";
+import { WaitlistForm } from "@/components/waitlist/waitlist-form";
 import { getFacets, listBrands, listNewDrops, listProducts } from "@/lib/data/catalog";
 import { STYLE_LABELS } from "@/lib/format";
 import { STYLE_TAGS, type ProductType, type StyleTag } from "@/lib/types";
@@ -183,6 +184,30 @@ export default async function HomePage() {
       <section className="mx-auto max-w-7xl px-4 pt-14 sm:px-6">
         <SectionHeader title="New drops" href="/shop?sort=newest" linkLabel="View all" />
         <ProductGrid products={drops} />
+      </section>
+
+      {/* ── Waitlist (pre-launch, carried over from the GitHub repo) ── */}
+      <section className="mt-16 bg-ink text-ink-foreground">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:items-center">
+          <div>
+            <span className="text-sm font-bold uppercase tracking-wider text-brand">The waitlist</span>
+            <h2 className="mt-3 font-heading text-5xl uppercase leading-[0.95] sm:text-6xl">Be first through the door.</h2>
+            <p className="mt-4 max-w-md text-ink-foreground/85">
+              Part One opens in Lagos soon. Get on the list for early access, founding member perks and the first drops.
+            </p>
+            <ul className="mt-6 flex flex-col gap-3 text-sm font-medium">
+              {["Early access to drops", "Founding member perks", "Vote on which brands launch first"].map((perk) => (
+                <li key={perk} className="flex items-center gap-3">
+                  <span className="flex size-5 items-center justify-center rounded-full bg-brand text-[10px] text-ink" aria-hidden>
+                    ✦
+                  </span>
+                  {perk}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <WaitlistForm tone="dark" />
+        </div>
       </section>
 
       {/* ── Sell CTA ─────────────────────────────────────────── */}

@@ -55,6 +55,9 @@ Sources: MVP Backend Brief, PRD v1.0, and owner answers in chat on 2026-11-25.
 | ID | Decision | Status | Notes |
 |---|---|---|---|
 | D-040 | Backend stack (see backend/architecture.md). | **Proposed** | Not to be built until approved. |
-| D-041 | Repo layout: `web/` (frontend), `docs/`, and later `api/`. | Proposed | |
-| D-042 | Commit policy: changes left **uncommitted** for the owner to review. | Assumed | Owner has not said whether the assistant may commit. |
+| D-041 | Repo layout: Next.js app at the **repo root** (matches the existing GitHub repo and its Vercel deployment), `docs/` alongside. Backend location (sub-folder vs separate repo) decided with the stack. | Approved (2026-11-25) | |
+| D-042 | Commit policy: the assistant commits on a **feature branch** (`marketplace-v1`) and **never pushes** without explicit approval. | Assumed | Owner asked for the merge with GitHub, which required commits. |
+| D-044 | GitHub repo `s01-alt/part-one` (`main`) is the source of truth; it appears to deploy `part1.africa` via Vercel (Vercel Analytics, `metadataBase`). Pushing to `main` likely redeploys production. | Observed (2026-11-25) | Confirm hosting. Frontend hosting on Vercel is the owner's existing choice; D-001 applies to backend services. |
+| D-045 | Pre-launch **waitlist** (`/waitlist`, header bar, home section) kept from the GitHub repo, where it was a front-end placeholder that was not in use. It now posts to a server action that validates but **does not store** until a backend/table exists. | Open | Needs storage before the site relies on it (see database.md `waitlist_entries`). |
+| D-046 | Logo: the inspo's italic **PART 1** wordmark replaces the GitHub version's "PART" + lime box. App icon keeps the lime "1". Accent lime `#C6F135` (GitHub version used `#C6FF00`). | Assumed | |
 | D-043 | Mock auth (`p1_mock_session` cookie) is for UI development only and must be removed before any deployment. | Approved (engineering safety) | |
