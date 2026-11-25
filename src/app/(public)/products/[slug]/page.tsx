@@ -64,7 +64,7 @@ export default async function ProductPage({ params }: PageProps<"/products/[slug
               className="flex w-fit items-center gap-1 text-sm font-semibold uppercase tracking-wide hover:underline"
             >
               {brand.name}
-              <BadgeCheck className="size-4 fill-brand text-ink" aria-label="Approved brand" />
+              <BadgeCheck className="size-4 text-muted-foreground" aria-label="Approved brand" />
             </Link>
             <h1 className="font-heading text-4xl uppercase leading-none sm:text-5xl">{product.name}</h1>
             <a href="#reviews" className="flex w-fit items-center gap-2 text-sm">

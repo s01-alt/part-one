@@ -31,7 +31,7 @@ export default async function SellerPayoutsPage() {
       <Panel title="Next payout" className="mt-6">
         <div className="flex flex-col gap-2">
           <div className="h-3 overflow-hidden rounded-full bg-muted" role="progressbar" aria-valuenow={progress} aria-valuemin={0} aria-valuemax={100} aria-label="Progress to payout threshold">
-            <div className="h-full bg-brand" style={{ width: `${progress}%` }} />
+            <div className="h-full bg-foreground" style={{ width: `${progress}%` }} />
           </div>
           <p className="text-sm">
             {toGo > 0 ? (

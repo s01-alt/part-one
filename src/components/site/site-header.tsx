@@ -21,15 +21,6 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-ink-border bg-ink text-ink-foreground">
       <CartHydrator />
-      {/* Pre-launch bar, carried over from the GitHub repo */}
-      <div className="hidden border-b border-ink-border bg-ink-2 py-2 text-center sm:block">
-        <p className="text-[11px] font-medium uppercase tracking-[0.25em] text-ink-muted">
-          Launching soon in Lagos ·{" "}
-          <Link href="/waitlist" className="font-semibold text-brand hover:underline">
-            Join the waitlist
-          </Link>
-        </p>
-      </div>
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6">
         <Sheet>
           <SheetTrigger className={`${iconLink} md:hidden`} aria-label="Open menu">
@@ -62,7 +53,7 @@ export function SiteHeader() {
 
         <nav className="ml-6 hidden items-center gap-7 text-sm font-semibold md:flex" aria-label="Main">
           {NAV.map((n) => (
-            <Link key={n.href} href={n.href} className="text-ink-foreground/90 transition-colors hover:text-brand">
+            <Link key={n.href} href={n.href} className="text-ink-foreground/80 transition-colors hover:text-ink-foreground">
               {n.label}
             </Link>
           ))}

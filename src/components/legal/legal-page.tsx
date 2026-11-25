@@ -25,7 +25,7 @@ export function LegalPage({
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
       <div
         role="note"
-        className="mb-10 flex gap-3 rounded-md border border-foreground/20 bg-brand/30 p-4 text-sm"
+        className="mb-10 flex gap-3 rounded-md bg-muted p-4 text-sm"
       >
         <TriangleAlert className="size-5 shrink-0 text-foreground" aria-hidden />
         <p>
@@ -34,7 +34,7 @@ export function LegalPage({
         </p>
       </div>
 
-      <h1 className="font-heading text-5xl uppercase sm:text-6xl">{title}</h1>
+      <h1 className="font-heading text-4xl uppercase sm:text-5xl">{title}</h1>
       <p className="mt-2 text-sm text-muted-foreground">Last updated: {updated}</p>
 
       <div className="mt-10 grid gap-12 lg:grid-cols-[240px_1fr]">

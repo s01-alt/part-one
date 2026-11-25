@@ -17,9 +17,9 @@ export function ProductCard({ product }: { product: ProductWithBrand }) {
   return (
     <Link
       href={`/products/${product.slug}`}
-      className="group flex flex-col overflow-hidden rounded-sm border bg-card transition-shadow hover:shadow-md"
+      className="group flex flex-col"
     >
-      <div className="relative aspect-[4/5] overflow-hidden bg-secondary">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-secondary">
         <ProductArt
           type={product.type}
           tone={product.tone}
@@ -27,7 +27,7 @@ export function ProductCard({ product }: { product: ProductWithBrand }) {
           className="h-full w-full transition-transform duration-500 group-hover:scale-[1.04]"
         />
         {isNew && (
-          <span className="absolute left-2 top-2 rounded-sm bg-brand px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-brand-foreground">
+          <span className="absolute left-2 top-2 rounded-sm bg-background/90 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground">
             New drop
           </span>
         )}
@@ -38,11 +38,11 @@ export function ProductCard({ product }: { product: ProductWithBrand }) {
           <Heart className="size-4" />
         </span>
       </div>
-      <div className="flex flex-1 flex-col gap-1 p-3">
-        <span className="text-[11px] font-bold uppercase tracking-wide">{product.brand.name}</span>
-        <span className="line-clamp-1 text-sm text-foreground/80 group-hover:underline">{product.name}</span>
+      <div className="flex flex-1 flex-col gap-1 pt-3">
+        <span className="text-xs text-muted-foreground">{product.brand.name}</span>
+        <span className="line-clamp-1 font-medium group-hover:underline">{product.name}</span>
         <div className="mt-1 flex items-center justify-between gap-2">
-          <span className="font-bold">{formatNaira(product.price)}</span>
+          <span>{formatNaira(product.price)}</span>
           <span className="flex items-center gap-1 text-xs text-muted-foreground">
             <Star className="size-3 fill-current" aria-hidden />
             {product.ratingAvg.toFixed(1)}
@@ -66,7 +66,7 @@ export function ProductCard({ product }: { product: ProductWithBrand }) {
 
 export function ProductGrid({ products }: { products: ProductWithBrand[] }) {
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">
       {products.map((p) => (
         <ProductCard key={p.id} product={p} />
       ))}

@@ -26,7 +26,7 @@ export function WaitlistForm({ tone = "light" }: { tone?: "light" | "dark" }) {
   if (done) {
     return (
       <div role="status" className={cn("rounded-sm border p-6", dark ? "border-ink-border bg-ink-2" : "bg-card")}>
-        <CheckCircle2 className={cn("size-8", dark ? "text-brand" : "fill-brand text-ink")} aria-hidden />
+        <CheckCircle2 className="size-8" aria-hidden />
         <h3 className="mt-4 font-heading text-3xl uppercase">You&apos;re in.</h3>
         <p className={cn("mt-2 text-sm", dark ? "text-ink-muted" : "text-muted-foreground")}>
           Thanks for joining. Early access goes to this list first.
@@ -43,7 +43,7 @@ export function WaitlistForm({ tone = "light" }: { tone?: "light" | "dark" }) {
   return (
     <form
       noValidate
-      className={cn("grid gap-5 rounded-sm border p-6 sm:p-8", dark ? "border-ink-border bg-ink-2" : "bg-card")}
+      className={cn("grid gap-5", dark && "text-ink-foreground")}
       onSubmit={(e) => {
         e.preventDefault();
         const fd = new FormData(e.currentTarget);
@@ -81,7 +81,7 @@ export function WaitlistForm({ tone = "light" }: { tone?: "light" | "dark" }) {
                 onClick={() => setRole(r.value)}
                 className={cn(
                   "rounded-sm border px-3 py-3 text-left transition-colors",
-                  on ? "border-foreground bg-brand text-brand-foreground" : "hover:border-foreground",
+                  on ? "border-foreground bg-foreground text-background" : "hover:border-foreground",
                 )}
               >
                 <span className="block text-sm font-bold">{r.label}</span>

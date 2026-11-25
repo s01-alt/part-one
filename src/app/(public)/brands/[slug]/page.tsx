@@ -52,7 +52,7 @@ export default async function BrandPage({ params }: PageProps<"/brands/[slug]">)
             <div className="flex flex-col gap-1">
               <h1 className="flex items-center gap-2 font-heading text-4xl uppercase sm:text-5xl">
                 {brand.name}
-                <BadgeCheck className="size-6 fill-brand text-ink" aria-label="Approved brand" />
+                <BadgeCheck className="size-6 text-muted-foreground" aria-label="Approved brand" />
               </h1>
               <p className="text-muted-foreground">{brand.tagline}</p>
               <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">

@@ -13,7 +13,7 @@ export function NotificationList({ items }: { items: Notification[] }) {
         const body = (
           <div className="flex gap-3 p-4">
             <span
-              className={cn("mt-1.5 size-2 shrink-0 rounded-full", n.readAt ? "bg-transparent" : "bg-brand")}
+              className={cn("mt-1.5 size-2 shrink-0 rounded-full", n.readAt ? "bg-transparent" : "bg-foreground")}
               aria-label={n.readAt ? undefined : "Unread"}
             />
             <div className="flex flex-1 flex-col gap-0.5">

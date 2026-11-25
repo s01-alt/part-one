@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function ShopPage({ searchParams }: PageProps<"/shop">) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-      <h1 className="mb-8 font-heading text-5xl uppercase sm:text-6xl">Shop</h1>
+      <h1 className="mb-8 font-heading text-4xl uppercase sm:text-5xl">Shop</h1>
       {/* searchParams is request data — read it inside Suspense so the shell can be prerendered. */}
       <Suspense fallback={<ShopSkeleton />}>
         <ShopResults searchParams={searchParams} />

@@ -23,7 +23,7 @@ export function DashboardShell({
       <header className="sticky top-0 z-40 border-b border-ink-border bg-ink text-ink-foreground">
         <div className="flex h-14 items-center gap-4 px-4 sm:px-6">
           <Logo />
-          <span className="rounded-sm bg-brand px-2 py-0.5 text-xs font-bold uppercase tracking-widest text-brand-foreground">
+          <span className="rounded-sm border border-ink-border px-2 py-0.5 text-xs font-medium text-ink-muted">
             {area}
           </span>
           <Link href="/" className="ml-2 hidden text-sm text-ink-muted hover:text-ink-foreground sm:block">

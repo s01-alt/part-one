@@ -61,7 +61,7 @@ async function LoginOptions({ searchParams }: { searchParams: PageProps<"/login"
         </button>
       </form>
 
-      <section className="rounded-lg border border-dashed border-foreground/30 bg-brand/25 p-4" aria-labelledby="demo-heading">
+      <section className="rounded-lg border border-dashed bg-muted p-4" aria-labelledby="demo-heading">
         <h2 id="demo-heading" className="text-sm font-semibold">
           Demo mode
         </h2>

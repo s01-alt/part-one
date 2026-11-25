@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Apply to sell" };
 export default function ApplyPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
-      <h1 className="font-heading text-5xl uppercase sm:text-6xl">Apply to sell</h1>
+      <h1 className="font-heading text-4xl uppercase sm:text-5xl">Apply to sell</h1>
       <p className="mt-2 text-muted-foreground">
         Tell us about your brand. We review every application and reply with an in-app notification.
       </p>

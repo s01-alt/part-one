@@ -25,7 +25,7 @@ export function SearchForm({
         autoFocus={autoFocus}
         placeholder="Search products, brands…"
         className={cn(
-          "h-10 w-full rounded-sm border pl-3 pr-10 text-sm outline-none focus-visible:ring-2 focus-visible:ring-brand",
+          "h-10 w-full rounded-sm border pl-3 pr-10 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring/60",
           dark
             ? "border-ink-border bg-ink-2 text-ink-foreground placeholder:text-ink-muted"
             : "border-input bg-card placeholder:text-muted-foreground",
@@ -36,7 +36,7 @@ export function SearchForm({
         aria-label="Search"
         className={cn(
           "absolute right-1 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-sm",
-          dark ? "text-ink-foreground hover:text-brand" : "text-muted-foreground hover:text-foreground",
+          dark ? "text-ink-muted hover:text-ink-foreground" : "text-muted-foreground hover:text-foreground",
         )}
       >
         <Search className="size-4" aria-hidden />

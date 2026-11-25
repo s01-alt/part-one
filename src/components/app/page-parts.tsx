@@ -13,7 +13,7 @@ export function PageHeader({
   return (
     <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div>
-        <h1 className="font-heading text-4xl uppercase leading-none sm:text-5xl">{title}</h1>
+        <h1 className="font-heading text-3xl uppercase leading-none sm:text-4xl">{title}</h1>
         {description && <p className="mt-2 text-muted-foreground">{description}</p>}
       </div>
       {actions && <div className="flex flex-wrap gap-2">{actions}</div>}
@@ -77,7 +77,7 @@ export function EmptyState({ title, children }: { title: string; children?: Reac
 /** Marks controls that do not persist yet because the backend does not exist. */
 export function MockNotice({ children }: { children?: React.ReactNode }) {
   return (
-    <p className="flex items-start gap-2 rounded-md border border-dashed border-foreground/25 bg-brand/20 p-3 text-xs text-muted-foreground">
+    <p className="flex items-start gap-2 rounded-md border border-dashed bg-muted p-3 text-xs text-muted-foreground">
       <TriangleAlert className="mt-0.5 size-3.5 shrink-0 text-foreground" aria-hidden />
       <span>{children ?? "Preview only — changes here are not saved until the backend is connected."}</span>
     </p>

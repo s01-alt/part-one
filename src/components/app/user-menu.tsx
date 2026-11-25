@@ -19,7 +19,7 @@ export async function UserMenu({ tone = "light" }: { tone?: "light" | "dark" }) 
   return (
     <div className="flex items-center gap-3">
       <span
-        className="flex size-8 items-center justify-center rounded-full bg-brand text-sm font-semibold text-brand-foreground"
+        className="flex size-8 items-center justify-center rounded-full bg-muted text-sm font-semibold text-foreground"
         aria-hidden
       >
         {user.name.slice(0, 1)}

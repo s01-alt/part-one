@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Checkout" };
 export default function CheckoutPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-      <h1 className="mb-8 font-heading text-5xl uppercase sm:text-6xl">Checkout</h1>
+      <h1 className="mb-8 font-heading text-4xl uppercase sm:text-5xl">Checkout</h1>
       <Suspense fallback={<div className="h-96 animate-pulse rounded-lg bg-muted" />}>
         <CheckoutGate />
       </Suspense>

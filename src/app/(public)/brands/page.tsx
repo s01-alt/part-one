@@ -13,7 +13,7 @@ export default async function BrandsPage() {
   const brands = await listBrands();
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-      <h1 className="font-heading text-5xl uppercase sm:text-6xl">Brands</h1>
+      <h1 className="font-heading text-4xl uppercase sm:text-5xl">Brands</h1>
       <p className="mt-2 max-w-xl text-muted-foreground">
         Every brand on Part One is reviewed and approved before it can sell.
       </p>
@@ -28,7 +28,7 @@ export default async function BrandsPage() {
               <div className="flex flex-1 flex-col gap-2 p-5">
                 <span className="flex items-center gap-1 text-lg font-semibold">
                   {b.name}
-                  <BadgeCheck className="size-4 fill-brand text-ink" aria-label="Approved brand" />
+                  <BadgeCheck className="size-4 text-muted-foreground" aria-label="Approved brand" />
                 </span>
                 <p className="text-sm text-muted-foreground">{b.tagline}</p>
                 <div className="mt-auto flex gap-4 pt-3 text-xs text-muted-foreground">
